@@ -7,13 +7,13 @@ import {
   StatusBar,
   TouchableNativeFeedback,
 } from 'react-native';
-import { getDecks, setDeckTitle } from '../utils/api';
+import { getDecks } from '../utils/api';
 
 const renderItem = (item) => {
   return (
     <TouchableNativeFeedback
       background={TouchableNativeFeedback.SelectableBackground()}
-      key={item.age}
+      key={item.title}
       onPress={() => this._onPress(item)}
     >
       <View style={styles.listItem}>
@@ -29,7 +29,6 @@ export const DeckList = () => {
   useEffect(() => {
     const getDecksData = async () => {
       const data = await getDecks();
-      console.log(data)
       const decks = Object.keys(data).map((key) => {
         return {
           title: key,
@@ -43,8 +42,15 @@ export const DeckList = () => {
 
   return (
     <View style={styles.listContainer}>
-      {decks.data !== 'undefined' ?
-      <FlatList data={decks.data} renderItem={({ item }) => renderItem(item)} />: <Text>No Decks here. Add new one to see.</Text>}
+      {decks === 'null' ? (
+        <Text>No Decks here. Add new one to see.</Text>
+      ) : (
+        <FlatList
+          data={decks ? decks.data : []}
+          renderItem={({ item }) => renderItem(item)}
+          keyExtractor={(item, index) => index.toString()}
+        />
+      )}
     </View>
   );
 };
