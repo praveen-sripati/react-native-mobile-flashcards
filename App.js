@@ -13,6 +13,7 @@ const MyTabs = () => {
         initialRouteName="Decks"
         tabBarOptions={{
           activeTintColor: '#ffffff',
+          indicatorStyle: { backgroundColor: 'white' },
           labelStyle: { fontSize: 16 },
           style: { backgroundColor: '#6200ee' },
         }}
@@ -26,9 +27,9 @@ const MyTabs = () => {
 
 export default function App() {
   return (
-    <View style={{ flex: 1}}>
+    <View style={{ flex: 1 }}>
       <StatusBar backgroundColor="#4C00D5" />
-      <MyTabs/>
+      <MyTabs />
     </View>
 
     // <NavigationContainer>
