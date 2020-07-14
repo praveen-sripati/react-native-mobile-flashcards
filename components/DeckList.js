@@ -4,7 +4,6 @@ import {
   Text,
   FlatList,
   StyleSheet,
-  StatusBar,
   TouchableNativeFeedback,
 } from 'react-native';
 import { getDecks } from '../utils/api';
@@ -38,7 +37,7 @@ export const DeckList = () => {
       setDecks({ data: decks });
     };
     getDecksData();
-  }, []);
+  }, [decks]);
 
   return (
     <View style={styles.listContainer}>
@@ -58,7 +57,6 @@ export const DeckList = () => {
 const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
   },
   listItem: {
     height: 72,
