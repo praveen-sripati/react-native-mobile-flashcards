@@ -6,20 +6,8 @@ import {
   StyleSheet,
   StatusBar,
   TouchableNativeFeedback,
-  AsyncStorage,
 } from 'react-native';
 import { getDecks, setDeckTitle } from '../utils/api';
-
-const DATA = [
-  {
-    name: 'Praveen',
-    age: 21,
-  },
-  {
-    name: 'Kiran',
-    age: 30,
-  },
-];
 
 const renderItem = (item) => {
   return (
@@ -41,6 +29,7 @@ export const DeckList = () => {
   useEffect(() => {
     const getDecksData = async () => {
       const data = await getDecks();
+      console.log(data)
       const decks = Object.keys(data).map((key) => {
         return {
           title: key,
@@ -54,7 +43,8 @@ export const DeckList = () => {
 
   return (
     <View style={styles.listContainer}>
-      <FlatList data={decks.data} renderItem={({ item }) => renderItem(item)} />
+      {decks.data !== 'undefined' ?
+      <FlatList data={decks.data} renderItem={({ item }) => renderItem(item)} />: <Text>No Decks here. Add new one to see.</Text>}
     </View>
   );
 };
