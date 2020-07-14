@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
-import { View, Button, TextInput, StyleSheet } from 'react-native';
+import { View, Text, Button, TextInput, StyleSheet } from 'react-native';
 import { TitleText } from './TitleText';
+import { setDeckTitle } from '../utils/api';
+
+const onAddNewDeck = (title, onChangeValue) => {
+  setDeckTitle(title);
+  onChangeValue('')
+}
 
 export const NewDeck = () => {
   const [value, onChangeValue] = useState('');
@@ -16,9 +22,10 @@ export const NewDeck = () => {
       />
       <View style={{marginTop: 20}}>
         <Button
-          title="Add Deck"
-          onPress={() => alert('Simple Button pressed')}
+          title={"Add New Deck"}
+          onPress={() => onAddNewDeck(value, onChangeValue)}
           color="#6200ee"
+          disabled={value === ''}
         />
       </View>
     </View>
