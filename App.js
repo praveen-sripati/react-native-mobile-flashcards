@@ -2,41 +2,45 @@ import * as React from 'react';
 import { View, Text, StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { DeckList, NewDeck } from './components';
+import { createStackNavigator } from '@react-navigation/stack';
+import { DeckList, NewDeck, DeckView } from './components';
 
 const Tab = createMaterialTopTabNavigator();
+const Stack = createStackNavigator();
 
-const MyTabs = () => {
+const Tabs = () => {
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        initialRouteName="Decks"
-        tabBarOptions={{
-          activeTintColor: '#ffffff',
-          indicatorStyle: { backgroundColor: 'white' },
-          labelStyle: { fontSize: 16 },
-          style: { backgroundColor: '#6200ee' },
-        }}
-      >
-        <Tab.Screen name="Decks" component={DeckList} />
-        <Tab.Screen name="New Deck" component={NewDeck} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <Tab.Navigator
+      initialRouteName="Decks"
+      tabBarOptions={{
+        activeTintColor: '#ffffff',
+        indicatorStyle: { backgroundColor: 'white' },
+        labelStyle: { fontSize: 16 },
+        style: { backgroundColor: '#6200ee' },
+      }}
+    >
+      <Tab.Screen name="Decks" component={DeckList} />
+      <Tab.Screen name="New Deck" component={NewDeck} />
+    </Tab.Navigator>
+  );
+};
+
+const MainNavigator = () => {
+  return (
+    <Stack.Navigator initialRouteName="Home" headerMode="screen">
+      <Stack.Screen name="Home" component={Tabs} options={{headerShown: false}} />
+      <Stack.Screen name="DeckView" component={DeckView} />
+    </Stack.Navigator>
   );
 };
 
 export default function App() {
   return (
-    <View style={{ flex: 1 }}>
-      <StatusBar backgroundColor="#4C00D5" />
-      <MyTabs />
-    </View>
-
-    // <NavigationContainer>
-    //   <Tab.Navigator>
-    //     <Tab.Screen name="Home" component={DeckList} />
-    //     <Tab.Screen name="Settings" component={NewDeck} />
-    //   </Tab.Navigator>
-    // </NavigationContainer>
+    <NavigationContainer>
+      <View style={{ flex: 1 }}>
+        <StatusBar backgroundColor="#4C00D5" />
+        <MainNavigator />
+      </View>
+    </NavigationContainer>
   );
 }

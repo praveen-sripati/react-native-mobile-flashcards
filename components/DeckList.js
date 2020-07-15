@@ -13,13 +13,13 @@ const deleteDeck = (title) => {
   removeDeck(title);
 };
 
-const renderItem = (item) => {
+const renderItem = (item, navigation) => {
   return (
     <View style={styles.listContainer}>
       <TouchableNativeFeedback
         background={TouchableNativeFeedback.SelectableBackground()}
         key={item.title}
-        onPress={() => this._onPress(item)}
+        onPress={() => navigation.navigate('DeckView')}
       >
         <View style={styles.listItem}>
           <Text style={styles.listItemText}>{item.title}</Text>
@@ -37,7 +37,7 @@ const renderItem = (item) => {
   );
 };
 
-export const DeckList = () => {
+export const DeckList = ({navigation}) => {
   const [decks, setDecks] = useState(null);
   useEffect(() => {
     const getDecksData = async () => {
@@ -60,7 +60,7 @@ export const DeckList = () => {
       ) : (
         <FlatList
           data={decks ? decks.data : []}
-          renderItem={({ item }) => renderItem(item)}
+          renderItem={({ item }) => renderItem(item, navigation)}
           keyExtractor={(item, index) => index.toString()}
         />
       )}
