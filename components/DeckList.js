@@ -19,7 +19,11 @@ const renderItem = (item, navigation) => {
       <TouchableNativeFeedback
         background={TouchableNativeFeedback.SelectableBackground()}
         key={item.title}
-        onPress={() => navigation.navigate('DeckView')}
+        onPress={() =>
+          navigation.navigate('DeckView', {
+            item,
+          })
+        }
       >
         <View style={styles.listItem}>
           <Text style={styles.listItemText}>{item.title}</Text>
@@ -37,21 +41,24 @@ const renderItem = (item, navigation) => {
   );
 };
 
-export const DeckList = ({navigation}) => {
+export const DeckList = ({ navigation }) => {
   const [decks, setDecks] = useState(null);
+
+  const getDecksData = async () => {
+    const data = await getDecks();
+    console.log(data)
+    const decks = Object.keys(data).map((key) => {
+      return {
+        title: key,
+        numOfCards: data[key].questions.length,
+      };
+    });
+    setDecks({ data: decks });
+  };
+
   useEffect(() => {
-    const getDecksData = async () => {
-      const data = await getDecks();
-      const decks = Object.keys(data).map((key) => {
-        return {
-          title: key,
-          numOfCards: data[key].questions.length,
-        };
-      });
-      setDecks({ data: decks });
-    };
     getDecksData();
-  }, [decks]);
+  }, []);
 
   return (
     <View style={styles.listContainer}>
