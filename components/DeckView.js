@@ -2,10 +2,6 @@ import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { TitleText } from './TitleText';
 
-const onAddCard = () => {
-  return;
-};
-
 export const DeckView = ({ route, navigation }) => {
   const { item } = route.params;
 
@@ -23,21 +19,23 @@ export const DeckView = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-        <TitleText title={item.title} size={70} />
+        <TitleText title={item.title} size={45} />
         <Text style={{color: "gray", fontSize: 18}}>{`${item.numOfCards} cards`}</Text>
       </View>
       <View>
         <View style={styles.button}>
           <Button
             title={'Add Card'}
-            onPress={() => onAddCard()}
+            onPress={() => navigation.navigate('New Card', {
+              item
+            })}
             color="#6200ee"
           />
         </View>
         <View style={styles.button}>
           <Button
-            title={'Add New Deck'}
-            onPress={() => onAddCard()}
+            title={'Start Quiz'}
+            onPress={() => navigation.navigate().goBack()}
             color="#6200ee"
           />
         </View>

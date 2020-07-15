@@ -3,7 +3,7 @@ import { View, Text, StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { DeckList, NewDeck, DeckView } from './components';
+import { DeckList, NewDeck, DeckView, NewCard } from './components';
 
 const Tab = createMaterialTopTabNavigator();
 const Stack = createStackNavigator();
@@ -28,8 +28,13 @@ const Tabs = () => {
 const MainNavigator = () => {
   return (
     <Stack.Navigator initialRouteName="Home" headerMode="screen">
-      <Stack.Screen name="Home" component={Tabs} options={{headerShown: false}} />
+      <Stack.Screen
+        name="Home"
+        component={Tabs}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen name="DeckView" component={DeckView} />
+      <Stack.Screen name="New Card" component={NewCard} />
     </Stack.Navigator>
   );
 };

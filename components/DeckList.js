@@ -26,7 +26,14 @@ const renderItem = (item, navigation) => {
         }
       >
         <View style={styles.listItem}>
-          <Text style={styles.listItemText}>{item.title}</Text>
+          <Text
+            style={[
+              styles.listItemText,
+              item.title.length < 15 ? { fontSize: 32 } : { fontSize: 24 },
+            ]}
+          >
+            {item.title}
+          </Text>
           <Text style={{ color: 'gray', fontSize: 16, fontFamily: 'Roboto' }}>
             number of cards {item.numOfCards}
           </Text>
@@ -91,7 +98,6 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   listItemText: {
-    fontSize: 32,
     fontFamily: 'Roboto',
   },
 });
