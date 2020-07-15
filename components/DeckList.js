@@ -62,10 +62,7 @@ export const DeckList = ({ navigation }) => {
     });
     setDecks({ data: decks });
   };
-
-  useEffect(() => {
-    getDecksData();
-  }, [decks]);
+  getDecksData();
 
   return (
     <View style={styles.listContainer}>

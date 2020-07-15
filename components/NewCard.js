@@ -1,6 +1,20 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
 import { TitleText } from './TitleText';
+import { addCardToDeck } from '../utils/api';
+
+const onAddCard = (
+  title,
+  card,
+  onChangeAnswer,
+  onChangeQuestion,
+  navigation
+) => {
+  addCardToDeck(title, card);
+  onChangeAnswer('');
+  onChangeQuestion('');
+  navigation.goBack();
+};
 
 export const NewCard = ({ route, navigation }) => {
   const [answer, onChangeAnswer] = useState('');
@@ -46,7 +60,18 @@ export const NewCard = ({ route, navigation }) => {
         <View style={styles.button}>
           <Button
             title={'Add Card'}
-            onPress={() => {return}}
+            onPress={() =>
+              onAddCard(
+                item.title,
+                {
+                  question,
+                  answer,
+                },
+                onChangeAnswer,
+                onChangeQuestion,
+                navigation
+              )
+            }
             color="#6200ee"
           />
         </View>
@@ -70,14 +95,15 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     borderColor: 'gray',
     borderWidth: 1,
+    borderRadius: 5,
   },
   button: {
     marginTop: 20,
     width: 200,
   },
   subtitle: {
-    fontSize:18,
-    fontWeight: "bold",
-    fontFamily: 'Roboto'
-  }
+    fontSize: 18,
+    fontWeight: 'bold',
+    fontFamily: 'Roboto',
+  },
 });

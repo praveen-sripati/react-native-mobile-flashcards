@@ -37,18 +37,20 @@ export const setDeckTitle = async (title) => {
 };
 
 export const addCardToDeck = async (title, card) => {
-  await AsyncStorage.getItem(UDACICARDS_STORAGE_KEY),
-    (error, results) => {
-      if (error) {
-        return console.log('Error adding new Card! -- Error:', error);
+  try {
+    return await AsyncStorage.getItem(UDACICARDS_STORAGE_KEY).then(
+      async (results) => {
+        const decks = JSON.parse(results);
+        decks[title].questions.push(card);
+        return await AsyncStorage.setItem(
+          UDACICARDS_STORAGE_KEY,
+          JSON.stringify(decks)
+        );
       }
-      const decks = JSON.parse(results);
-      decks[title].questions.concat(card);
-      return AsyncStorage.setItem(
-        UDACICARDS_STORAGE_KEY,
-        JSON.stringify(decks)
-      );
-    };
+    );
+  } catch (error) {
+    console.log('Error adding new Card! -- Error:', error);
+  }
 };
 
 export const removeDeck = async (title) => {
@@ -62,6 +64,6 @@ export const removeDeck = async (title) => {
       JSON.stringify(decks)
     );
   } catch (error) {
-    console.log("Error removing Deck ", error)
+    console.log('Error removing Deck ', error);
   }
 };
