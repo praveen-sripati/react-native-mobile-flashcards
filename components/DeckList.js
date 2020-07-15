@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableNativeFeedback,
 } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 import { getDecks } from '../utils/api';
 
 const renderItem = (item) => {
@@ -16,8 +17,21 @@ const renderItem = (item) => {
       onPress={() => this._onPress(item)}
     >
       <View style={styles.listItem}>
-        <Text style={styles.listItemText}>{item.title}</Text>
-        <Text>number of cards {item.numOfCards}</Text>
+        <View style={styles.listItemTitles}>
+          <Text style={styles.listItemText}>{item.title}</Text>
+          <Text style={{ color: 'gray', fontSize: 16, fontFamily: 'Roboto' }}>
+            number of cards {item.numOfCards}
+          </Text>
+        </View>
+        <View style={styles.listItemIcon}>
+          <TouchableNativeFeedback>
+            <AntDesign
+              name="delete"
+              size={24}
+              color="black"
+            />
+          </TouchableNativeFeedback>
+        </View>
       </View>
     </TouchableNativeFeedback>
   );
@@ -60,6 +74,18 @@ const styles = StyleSheet.create({
   },
   listItem: {
     height: 72,
+    flexDirection: "row",
+  },
+  listItemIcon: {
+    paddingTop: 25,
+    paddingLeft: 25,
+    paddingRight: 25,
+    paddingBottom: 25,
+  },
+  listItemTitles: {
+    flexGrow: 1,
+    alignSelf: "flex-start",
+    paddingTop: 10,
     paddingLeft: 10,
     paddingRight: 10,
     paddingBottom: 10,
@@ -67,6 +93,5 @@ const styles = StyleSheet.create({
   listItemText: {
     fontSize: 32,
     fontFamily: 'Roboto',
-    textTransform: 'uppercase',
   },
 });
