@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
 import { View, Text, Button, TextInput, StyleSheet } from 'react-native';
 import { TitleText } from './TitleText';
-import { setDeckTitle } from '../utils/api';
+import { setDeckTitle, getDecks } from '../utils/api';
 
-const onAddNewDeck = (title, onChangeValue) => {
-  setDeckTitle(title);
+const onAddNewDeck = async (title, onChangeValue, navigation) => {
+  await setDeckTitle(title);
   onChangeValue('');
+  const data = await getDecks();
+  const item = {
+    title: data[title].title,
+    questions: data[title].questions,
+    numOfCards: data[title].questions.length
+  }
+  navigation.navigate('DeckView', {
+    item
+  })
 };
 
-export const NewDeck = () => {
+export const NewDeck = ({ navigation }) => {
   const [value, onChangeValue] = useState('');
   return (
     <View style={styles.container}>
@@ -23,7 +32,7 @@ export const NewDeck = () => {
       <View style={{ marginTop: 20, width: 150 }}>
         <Button
           title={'Add Deck'}
-          onPress={() => onAddNewDeck(value, onChangeValue)}
+          onPress={() => onAddNewDeck(value, onChangeValue, navigation)}
           color="#6200ee"
           disabled={value === ''}
         />
@@ -46,6 +55,6 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     borderColor: 'gray',
     borderWidth: 1,
-    borderRadius: 5
+    borderRadius: 5,
   },
 });

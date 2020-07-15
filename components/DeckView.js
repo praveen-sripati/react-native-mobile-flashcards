@@ -21,21 +21,18 @@ export const DeckView = ({ route, navigation }) => {
   const getDecksData = async () => {
     const data = await getDecks();
     setDeck({
-      data: data[item.title]
-    })
+      data: data[item.title],
+    });
   };
-
-  useEffect(() => {
-    getDecksData()
-  }, [deck])
+  getDecksData();
 
   return (
     <View style={styles.container}>
       <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-        <TitleText title={deck ? deck.data.title : ""} size={45} />
-        <Text
-          style={{ color: 'gray', fontSize: 18 }}
-        >{`${deck && deck.data.questions.length} cards`}</Text>
+        <TitleText title={item.title} size={45} />
+        <Text style={{ color: 'gray', fontSize: 18 }}>{`${
+          deck ? deck.data.questions.length : " "
+        } cards`}</Text>
       </View>
       <View>
         <View style={styles.button}>

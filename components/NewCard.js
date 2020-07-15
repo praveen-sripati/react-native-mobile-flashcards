@@ -73,6 +73,7 @@ export const NewCard = ({ route, navigation }) => {
               )
             }
             color="#6200ee"
+            disabled={question === '' || answer === ''}
           />
         </View>
       </View>
