@@ -7,33 +7,33 @@ import {
   TouchableNativeFeedback,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import { getDecks } from '../utils/api';
+import { getDecks, removeDeck } from '../utils/api';
+
+const deleteDeck = (title) => {
+  removeDeck(title);
+};
 
 const renderItem = (item) => {
   return (
-    <TouchableNativeFeedback
-      background={TouchableNativeFeedback.SelectableBackground()}
-      key={item.title}
-      onPress={() => this._onPress(item)}
-    >
-      <View style={styles.listItem}>
-        <View style={styles.listItemTitles}>
+    <View style={styles.listContainer}>
+      <TouchableNativeFeedback
+        background={TouchableNativeFeedback.SelectableBackground()}
+        key={item.title}
+        onPress={() => this._onPress(item)}
+      >
+        <View style={styles.listItem}>
           <Text style={styles.listItemText}>{item.title}</Text>
           <Text style={{ color: 'gray', fontSize: 16, fontFamily: 'Roboto' }}>
             number of cards {item.numOfCards}
           </Text>
         </View>
+      </TouchableNativeFeedback>
+      <TouchableNativeFeedback onPress={() => deleteDeck(item.title)}>
         <View style={styles.listItemIcon}>
-          <TouchableNativeFeedback>
-            <AntDesign
-              name="delete"
-              size={24}
-              color="black"
-            />
-          </TouchableNativeFeedback>
+          <AntDesign name="delete" size={24} color="black" />
         </View>
-      </View>
-    </TouchableNativeFeedback>
+      </TouchableNativeFeedback>
+    </View>
   );
 };
 
@@ -71,24 +71,21 @@ export const DeckList = () => {
 const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
-  },
-  listItem: {
+    flexDirection: 'row',
     height: 72,
-    flexDirection: "row",
   },
   listItemIcon: {
+    height: 72,
     paddingTop: 25,
-    paddingLeft: 25,
-    paddingRight: 25,
-    paddingBottom: 25,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
-  listItemTitles: {
+  listItem: {
     flexGrow: 1,
-    alignSelf: "flex-start",
     paddingTop: 10,
+    paddingBottom: 10,
     paddingLeft: 10,
     paddingRight: 10,
-    paddingBottom: 10,
   },
   listItemText: {
     fontSize: 32,

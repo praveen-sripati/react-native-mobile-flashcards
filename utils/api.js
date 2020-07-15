@@ -50,3 +50,18 @@ export const addCardToDeck = async (title, card) => {
       );
     };
 };
+
+export const removeDeck = async (title) => {
+  try {
+    const data = await AsyncStorage.getItem(UDACICARDS_STORAGE_KEY);
+    const decks = JSON.parse(data);
+    decks[title] = undefined;
+    delete decks[title];
+    return await AsyncStorage.setItem(
+      UDACICARDS_STORAGE_KEY,
+      JSON.stringify(decks)
+    );
+  } catch (error) {
+    console.log("Error removing Deck ", error)
+  }
+};

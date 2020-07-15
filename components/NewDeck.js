@@ -18,6 +18,7 @@ export const NewDeck = () => {
         onChangeText={(text) => onChangeValue(text)}
         value={value}
         placeholder="Enter text here"
+        maxLength={20}
       />
       <View style={{marginTop: 20}}>
         <Button
