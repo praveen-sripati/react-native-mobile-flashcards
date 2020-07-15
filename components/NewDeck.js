@@ -5,14 +5,14 @@ import { setDeckTitle } from '../utils/api';
 
 const onAddNewDeck = (title, onChangeValue) => {
   setDeckTitle(title);
-  onChangeValue('')
-}
+  onChangeValue('');
+};
 
 export const NewDeck = () => {
   const [value, onChangeValue] = useState('');
   return (
     <View style={styles.container}>
-      <TitleText title="What is the Title of your New Deck?" />
+      <TitleText title="What is the Title of your New Deck?" size={32} />
       <TextInput
         style={styles.textInput}
         onChangeText={(text) => onChangeValue(text)}
@@ -20,9 +20,9 @@ export const NewDeck = () => {
         placeholder="Enter text here"
         maxLength={20}
       />
-      <View style={{marginTop: 20}}>
+      <View style={{ marginTop: 20, width: 150 }}>
         <Button
-          title={"Add New Deck"}
+          title={'Add Deck'}
           onPress={() => onAddNewDeck(value, onChangeValue)}
           color="#6200ee"
           disabled={value === ''}

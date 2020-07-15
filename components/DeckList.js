@@ -46,10 +46,10 @@ export const DeckList = ({ navigation }) => {
 
   const getDecksData = async () => {
     const data = await getDecks();
-    console.log(data)
     const decks = Object.keys(data).map((key) => {
       return {
         title: key,
+        questions: data[key].questions,
         numOfCards: data[key].questions.length,
       };
     });
@@ -58,19 +58,15 @@ export const DeckList = ({ navigation }) => {
 
   useEffect(() => {
     getDecksData();
-  }, []);
+  }, [decks]);
 
   return (
     <View style={styles.listContainer}>
-      {decks === 'null' ? (
-        <Text>No Decks here. Add new one to see.</Text>
-      ) : (
-        <FlatList
-          data={decks ? decks.data : []}
-          renderItem={({ item }) => renderItem(item, navigation)}
-          keyExtractor={(item, index) => index.toString()}
-        />
-      )}
+      <FlatList
+        data={decks ? decks.data : []}
+        renderItem={({ item }) => renderItem(item, navigation)}
+        keyExtractor={(item, index) => index.toString()}
+      />
     </View>
   );
 };

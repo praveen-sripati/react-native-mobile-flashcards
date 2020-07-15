@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export const TitleText = ({ title }) => {
+export const TitleText = ({ title, size }) => {
   return (
     <View style={styles.titleTextContainer}>
-      <Text style={styles.titleText}>{title}</Text>
+      <Text style={[styles.titleText, {fontSize: size}]}>{title}</Text>
     </View>
   );
 };
@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
   },
   titleText: {
     textAlign:"center",
-    fontSize: 32,
     fontWeight: "bold",
     fontFamily:'Roboto',
   }
