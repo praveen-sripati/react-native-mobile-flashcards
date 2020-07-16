@@ -3,7 +3,7 @@ import { View, Text, StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { DeckList, NewDeck, DeckView, NewCard } from './components';
+import { DeckList, NewDeck, DeckView, NewCard, QuizView } from './components';
 
 const Tab = createMaterialTopTabNavigator();
 const Stack = createStackNavigator();
@@ -35,6 +35,7 @@ const MainNavigator = () => {
       />
       <Stack.Screen name="DeckView" component={DeckView} />
       <Stack.Screen name="New Card" component={NewCard} />
+      <Stack.Screen name="QuizView" component={QuizView} />
     </Stack.Navigator>
   );
 };

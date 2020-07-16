@@ -26,13 +26,15 @@ export const DeckView = ({ route, navigation }) => {
   };
   getDecksData();
 
+  const numOfCards = deck ? deck.data.questions.length : ' ';
+
   return (
     <View style={styles.container}>
       <View style={{ alignItems: 'center', justifyContent: 'center' }}>
         <TitleText title={item.title} size={45} />
-        <Text style={{ color: 'gray', fontSize: 18 }}>{`${
-          deck ? deck.data.questions.length : " "
-        } cards`}</Text>
+        <Text
+          style={{ color: 'gray', fontSize: 18 }}
+        >{`${numOfCards} cards`}</Text>
       </View>
       <View>
         <View style={styles.button}>
@@ -49,8 +51,13 @@ export const DeckView = ({ route, navigation }) => {
         <View style={styles.button}>
           <Button
             title={'Start Quiz'}
-            onPress={() => navigation.navigate().goBack()}
+            onPress={() =>
+              navigation.navigate('QuizView', {
+                questions: deck ? deck.data.questions : null,
+              })
+            }
             color="#6200ee"
+            disabled={numOfCards === 0 || numOfCards === ' '}
           />
         </View>
       </View>
