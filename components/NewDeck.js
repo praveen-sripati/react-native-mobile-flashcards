@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Button, TextInput, StyleSheet } from 'react-native';
 import { TitleText } from './TitleText';
 import { setDeckTitle, getDecks } from '../utils/api';
+
 
 const onAddNewDeck = async (title, onChangeValue, navigation) => {
   await setDeckTitle(title);
@@ -10,11 +11,11 @@ const onAddNewDeck = async (title, onChangeValue, navigation) => {
   const item = {
     title: data[title].title,
     questions: data[title].questions,
-    numOfCards: data[title].questions.length
-  }
+    numOfCards: data[title].questions.length,
+  };
   navigation.navigate('DeckView', {
-    item
-  })
+    item,
+  });
 };
 
 export const NewDeck = ({ navigation }) => {

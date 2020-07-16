@@ -62,7 +62,10 @@ export const DeckList = ({ navigation }) => {
     });
     setDecks({ data: decks });
   };
-  getDecksData();
+
+  useEffect(() => {
+    getDecksData();
+  });
 
   return (
     <View style={styles.listContainer}>
@@ -89,7 +92,6 @@ const styles = StyleSheet.create({
   },
   listItem: {
     flexGrow: 1,
-    paddingTop: 10,
     paddingBottom: 10,
     paddingLeft: 10,
     paddingRight: 10,

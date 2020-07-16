@@ -24,7 +24,10 @@ export const DeckView = ({ route, navigation }) => {
       data: data[item.title],
     });
   };
-  getDecksData();
+
+  useEffect(() => {
+    getDecksData();
+  });
 
   const numOfCards = deck ? deck.data.questions.length : ' ';
 
