@@ -6,7 +6,7 @@ import {
   StyleSheet,
   TouchableNativeFeedback,
 } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import { getDecks, removeDeck } from '../utils/api';
 
 const deleteDeck = (title) => {
@@ -48,6 +48,17 @@ const renderItem = (item, navigation) => {
   );
 };
 
+const EmptyList = () => {
+  return (
+    <View style={{marginTop: 70, alignItems: 'center', justifyContent: 'center'}}>
+      <MaterialCommunityIcons name="delete-empty" size={200} color="green" />
+      <Text style={{ textAlign: 'center' }}>
+        No Decks here, Add new one to see it.
+      </Text>
+    </View>
+  );
+};
+
 export const DeckList = ({ navigation }) => {
   const [decks, setDecks] = useState(null);
 
@@ -73,6 +84,7 @@ export const DeckList = ({ navigation }) => {
         data={decks ? decks.data : []}
         renderItem={({ item }) => renderItem(item, navigation)}
         keyExtractor={(item, index) => index.toString()}
+        ListEmptyComponent={<EmptyList />}
       />
     </View>
   );
