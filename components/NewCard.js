@@ -13,7 +13,9 @@ const onAddCard = (
   addCardToDeck(title, card);
   onChangeAnswer('');
   onChangeQuestion('');
-  navigation.goBack();
+  navigation.navigate('DeckView', {
+    subscribeValue: true
+  });
 };
 
 export const NewCard = ({ route, navigation }) => {

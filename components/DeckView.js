@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { TitleText } from './TitleText';
 import { getDecks } from '../utils/api';
+import { sub } from 'react-native-reanimated';
 
 export const DeckView = ({ route, navigation }) => {
   const [deck, setDeck] = useState(null);
   const { item } = route.params;
+  let { subscribeValue } = route.params;
 
   navigation.setOptions({
     title: item.title,

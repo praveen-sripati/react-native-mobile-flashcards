@@ -1,52 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { ListItem } from './ListItem';
 import {
   View,
   Text,
   FlatList,
   StyleSheet,
-  TouchableNativeFeedback,
 } from 'react-native';
-import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
-import { getDecks, removeDeck } from '../utils/api';
-
-const deleteDeck = (title) => {
-  removeDeck(title);
-};
-
-const renderItem = (item, navigation) => {
-  return (
-    <View style={styles.listContainer}>
-      <TouchableNativeFeedback
-        background={TouchableNativeFeedback.SelectableBackground()}
-        key={item.title}
-        onPress={() =>
-          navigation.navigate('DeckView', {
-            item,
-          })
-        }
-      >
-        <View style={styles.listItem}>
-          <Text
-            style={[
-              styles.listItemText,
-              item.title.length < 15 ? { fontSize: 32 } : { fontSize: 24 },
-            ]}
-          >
-            {item.title}
-          </Text>
-          <Text style={{ color: 'gray', fontSize: 16, fontFamily: 'Roboto' }}>
-            number of cards {item.numOfCards}
-          </Text>
-        </View>
-      </TouchableNativeFeedback>
-      <TouchableNativeFeedback onPress={() => deleteDeck(item.title)}>
-        <View style={styles.listItemIcon}>
-          <AntDesign name="delete" size={24} color="black" />
-        </View>
-      </TouchableNativeFeedback>
-    </View>
-  );
-};
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { getDecks } from '../utils/api';
 
 const EmptyList = () => {
   return (
@@ -84,7 +45,7 @@ export const DeckList = ({ navigation }) => {
     <View style={styles.listContainer}>
       <FlatList
         data={decks ? decks.data : []}
-        renderItem={({ item }) => renderItem(item, navigation)}
+        renderItem={({ item, index }) => <ListItem item={item} index={index} navigation={navigation} />}
         keyExtractor={(item, index) => index.toString()}
         ListEmptyComponent={<EmptyList />}
       />
