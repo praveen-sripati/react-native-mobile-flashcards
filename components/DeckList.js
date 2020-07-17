@@ -27,7 +27,7 @@ export const DeckList = ({ navigation }) => {
 
   const getDecksData = async () => {
     const data = await getDecks();
-    const decks = Object.keys(data).map((key) => {
+    const decks = data && Object.keys(data).map((key) => {
       return {
         title: key,
         questions: data[key].questions,
