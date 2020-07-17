@@ -45,7 +45,12 @@ export const QuizView = ({ route, navigation }) => {
             <Button
               title={'Restart Quiz'}
               color="#6200ee"
-              onPress={() => setIndex(0)}
+              onPress={() => {
+                setIndex(0)
+                setCorrect(0)
+                setIncorrect(0)
+                setShowAnswer(false)
+              }}
             />
           </View>
           <View style={styles.button}>

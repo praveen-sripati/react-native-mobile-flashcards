@@ -14,11 +14,9 @@ export const clearLocalNotification = async () => {
 export const setLocalNotification = async () => {
   const notificationStatus = await AsyncStorage.getItem(NOTIFICATION_KEY);
   if (notificationStatus === null) {
-    console.log('in permissions');
     const { status, permissions } = await Permissions.askAsync(
       Permissions.NOTIFICATIONS
     );
-    console.log(status);
     if (status === 'granted') {
       Notifications.cancelAllScheduledNotificationsAsync();
 

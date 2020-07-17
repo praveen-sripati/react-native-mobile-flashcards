@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   Text,
@@ -16,14 +16,14 @@ const deleteDeck = (title) => {
 export const ListItem = ({ item, index, navigation }) => {
   const animatedValue = new Animated.Value(1);
 
-  Animated.timing(animatedValue, {
-    toValue: 0,
-    duration: 1000,
-    delay: index * 350,
-    useNativeDriver: true,
-  }).start();
-
-  console.log(animatedValue);
+  useEffect(() => {
+    Animated.timing(animatedValue, {
+      toValue: 0,
+      duration: 1000,
+      delay: index * 350,
+      useNativeDriver: true,
+    }).start();
+  }, [])
 
   return (
     <Animated.View style={[styles.listContainer, { opacity: animatedValue }]}>
