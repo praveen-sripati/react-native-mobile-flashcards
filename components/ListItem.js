@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   View,
   Text,
@@ -9,24 +9,38 @@ import {
 import { AntDesign } from '@expo/vector-icons';
 import { removeDeck } from '../utils/api';
 
-const deleteDeck = (title) => {
-  removeDeck(title);
-};
-
 export const ListItem = ({ item, index, navigation }) => {
-  const animatedValue = new Animated.Value(1);
+  const fadeAnim = useRef(new Animated.Value(0)).current;
 
-  useEffect(() => {
-    Animated.timing(animatedValue, {
+  const deleteDeck = async (title) => {
+    let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+    fadeOut();
+    await wait(500)
+    await removeDeck(title)
+  };
+
+  const fadeOut = () => {
+    // console.log(fadeAnim)
+    Animated.timing(fadeAnim, {
       toValue: 0,
-      duration: 1000,
-      delay: index * 350,
-      useNativeDriver: true,
+      duration: 500,
+      useNativeDriver: false,
     }).start();
-  }, [])
+  };
+
+  const fadeIn = () => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 1000,
+      delay: index * 250,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  useEffect(() => fadeIn(), []);
 
   return (
-    <Animated.View style={[styles.listContainer, { opacity: animatedValue }]}>
+    <Animated.View style={[styles.listContainer, { opacity: fadeAnim }]}>
       <TouchableNativeFeedback
         background={TouchableNativeFeedback.SelectableBackground()}
         key={item.title}
