@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ListItem } from './ListItem';
-import {
-  View,
-  Text,
-  FlatList,
-  StyleSheet,
-} from 'react-native';
+import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { getDecks } from '../utils/api';
 
@@ -27,13 +22,15 @@ export const DeckList = ({ navigation }) => {
 
   const getDecksData = async () => {
     const data = await getDecks();
-    const decks = data && Object.keys(data).map((key) => {
-      return {
-        title: key,
-        questions: data[key].questions,
-        numOfCards: data[key].questions.length,
-      };
-    });
+    const decks =
+      data &&
+      Object.keys(data).map((key) => {
+        return {
+          title: key,
+          questions: data[key].questions,
+          numOfCards: data[key].questions.length,
+        };
+      });
     setDecks({ data: decks });
   };
 
@@ -45,7 +42,9 @@ export const DeckList = ({ navigation }) => {
     <View style={styles.listContainer}>
       <FlatList
         data={decks ? decks.data : []}
-        renderItem={({ item, index }) => <ListItem item={item} index={index} navigation={navigation} />}
+        renderItem={({ item, index }) => (
+          <ListItem item={item} index={index} navigation={navigation} />
+        )}
         keyExtractor={(item, index) => index.toString()}
         ListEmptyComponent={<EmptyList />}
       />
