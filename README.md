@@ -4,6 +4,8 @@ This is the final project of Udacity's React Nanodegree Program, to evaluate the
 
 The app will allow users to study collections of flashcards. It will allow users to create different categories of flashcards called "decks", add flashcards to those decks, then take quizzes on those decks.
 
+This App works only in Android OS Device.
+
 
 ## Installation
 
