@@ -50,7 +50,9 @@ const renderItem = (item, navigation) => {
 
 const EmptyList = () => {
   return (
-    <View style={{marginTop: 70, alignItems: 'center', justifyContent: 'center'}}>
+    <View
+      style={{ marginTop: 70, alignItems: 'center', justifyContent: 'center' }}
+    >
       <MaterialCommunityIcons name="delete-empty" size={200} color="green" />
       <Text style={{ textAlign: 'center' }}>
         No Decks here, Add new one to see it.
@@ -94,16 +96,17 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
     flexDirection: 'row',
-    height: 72,
+    height: 80,
   },
   listItemIcon: {
-    height: 72,
-    paddingTop: 25,
-    paddingLeft: 20,
-    paddingRight: 20,
+    height: 80,
+    paddingTop: 30,
+    paddingLeft: 25,
+    paddingRight: 25,
   },
   listItem: {
     flexGrow: 1,
+    paddingTop: 10,
     paddingBottom: 10,
     paddingLeft: 10,
     paddingRight: 10,

@@ -1,9 +1,10 @@
-import * as React from 'react';
-import { View, Text, StatusBar } from 'react-native';
+import React, {useEffect} from 'react';
+import { View, StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { DeckList, NewDeck, DeckView, NewCard, QuizView } from './components';
+import { setLocalNotification } from './utils/helpers';
 
 const Tab = createMaterialTopTabNavigator();
 const Stack = createStackNavigator();
@@ -41,6 +42,9 @@ const MainNavigator = () => {
 };
 
 export default function App() {
+  useEffect(() => {
+    setLocalNotification()
+  }, [])
   return (
     <NavigationContainer>
       <View style={{ flex: 1 }}>

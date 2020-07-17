@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Text, View, Button, StyleSheet } from 'react-native';
 import { TitleText } from './TitleText';
 import { TouchableNativeFeedback } from 'react-native-gesture-handler';
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 
 export const QuizView = ({ route, navigation }) => {
   const [index, setIndex] = useState(0);
@@ -22,6 +23,11 @@ export const QuizView = ({ route, navigation }) => {
     },
     headerTintColor: 'white',
   });
+
+  if (index === numOfCards) {
+    clearLocalNotification()
+      .then(setLocalNotification)
+  }
 
   const Results = () => {
     const correctPercentage = ((correct / numOfCards) * 100).toFixed(0);
